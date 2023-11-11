@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TestClass.generated.h"
+#include "GameStateLogic.generated.h"
 
 UCLASS()
-class PROJ2023_API ATestClass : public AActor
+class PROJ2023_API AGameStateLogic : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATestClass();
-	
+	AGameStateLogic();
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,9 +24,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	float speed = 5;
-	
-
+	TSubclassOf<AActor>WorkerToSpawn;
 
 	
+
 };

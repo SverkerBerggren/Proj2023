@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TestClass.generated.h"
+#include "Worker.generated.h"
 
 UCLASS()
-class PROJ2023_API ATestClass : public AActor
+class PROJ2023_API AWorker : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATestClass();
-	
+	AWorker();
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,9 +24,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	float speed = 5;
-	
+	int32 workRate = 80;
+	UPROPERTY(EditAnywhere)
+	int32 salary = 100;
 
 
 	
+
 };
