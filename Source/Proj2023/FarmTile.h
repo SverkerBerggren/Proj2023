@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TestClass.generated.h"
+#include "FarmTile.generated.h"
 
 UCLASS()
-class PROJ2023_API ATestClass : public AActor
+class PROJ2023_API AFarmTile : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATestClass();
-	
+	AFarmTile();
 
 protected:
 	// Called when the game starts or when spawned
@@ -24,10 +23,4 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere)
-	float speed = 5;
-	
-
-
-	
 };
