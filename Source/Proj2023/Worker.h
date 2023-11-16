@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "GameStateLogic.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Worker.generated.h"
@@ -24,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	int32 workRate = 80;
+	int32 workRate = 40;
 	UPROPERTY(EditAnywhere)
 	int32 salary = 100;
 

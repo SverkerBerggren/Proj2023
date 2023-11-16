@@ -41,7 +41,7 @@ private:
 	int32 storageLevel = 0; 
 	int32 currentStorage = 0;
 
-	
+	int32 moneyStored = 0;
 
 	int32 wheatStored = 0;
 	int32 appleStored = 0; 

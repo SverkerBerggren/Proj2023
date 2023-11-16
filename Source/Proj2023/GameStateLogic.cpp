@@ -19,21 +19,39 @@ void AGameStateLogic::BeginPlay()
 {
 	Super::BeginPlay();
 	//GetWorld()->SpawnActor<AActor>(WorkerToSpawn, GetActorTransform());
-	TArray<AActor*> ActorsToFind;
+	//TArray<AActor*> ActorsToFind;
+	//
+	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWorker::StaticClass(), ActorsToFind);
+	//
+	//for (AActor* foundWorker : ActorsToFind)
+	//{
+	//	AWorker* workerFound = static_cast<AWorker*>(foundWorker);
+	//
+	//	FString message = FString::FromInt(workerFound->workRate);
+	//
+	//	
+	//	
+	//	UE_LOG(LogTemp, Warning, TEXT("message %s"), *message);
+	//
+	//}
+}
 
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWorker::StaticClass(), ActorsToFind);
+void AGameStateLogic::Setup()
+{
+	AddWorker();
 
-	for (AActor* foundWorker : ActorsToFind)
-	{
-		AWorker* workerFound = static_cast<AWorker*>(foundWorker);
+	AddMoney(1500);
+}
 
-		FString message = FString::FromInt(workerFound->workRate);
+void AGameStateLogic::AddMoney(int32 amount)
+{
+	moneyStored += amount;
+}
 
-		
-		
-		UE_LOG(LogTemp, Warning, TEXT("message %s"), *message);
-
-	}
+void AGameStateLogic::AddWorker()
+{	
+	AWorker newWorker = AWorker();
+	workerRegistry.Add(workerRegistry.Num() + 1, newWorker)
 }
 
 // Called every frame
