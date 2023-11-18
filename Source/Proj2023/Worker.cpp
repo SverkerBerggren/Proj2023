@@ -3,25 +3,10 @@
 
 #include "Worker.h"
 
-// Sets default values
-AWorker::AWorker()
+Worker::Worker()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 }
 
-// Called when the game starts or when spawned
-void AWorker::BeginPlay()
+Worker::~Worker()
 {
-	Super::BeginPlay();
-	
 }
-
-// Called every frame
-void AWorker::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

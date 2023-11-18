@@ -2,7 +2,7 @@
 
 
 #include "GameStateLogic.h"
-#include "Worker.h"
+
 #include "Kismet/GameplayStatics.h"
 
 
@@ -18,31 +18,12 @@ AGameStateLogic::AGameStateLogic()
 void AGameStateLogic::BeginPlay()
 {
 	Super::BeginPlay();
-	//GetWorld()->SpawnActor<AActor>(WorkerToSpawn, GetActorTransform());
-	//TArray<AActor*> ActorsToFind;
-	//
-	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWorker::StaticClass(), ActorsToFind);
-	//
-	//for (AActor* foundWorker : ActorsToFind)
-	//{
-	//	AWorker* workerFound = static_cast<AWorker*>(foundWorker);
-	//
-	//	FString message = FString::FromInt(workerFound->workRate);
-	//
-	//	
-	//	
-	//	UE_LOG(LogTemp, Warning, TEXT("message %s"), *message);
-	//
-	//}
+	
+	for (int i = 0; i < 9; i++)
+	{
+
+	}
 }
-
-void AGameStateLogic::Setup()
-{
-	AddWorker();
-
-	AddMoney(1500);
-}
-
 void AGameStateLogic::AddMoney(int32 amount)
 {
 	moneyStored += amount;
@@ -50,8 +31,96 @@ void AGameStateLogic::AddMoney(int32 amount)
 
 void AGameStateLogic::AddWorker()
 {	
-	AWorker newWorker = AWorker();
-	workerRegistry.Add(workerRegistry.Num() + 1, newWorker)
+	Worker newWorker = Worker();
+	workerRegistry.Add(workersCreated + 1, newWorker);
+
+	workersCreated += 1;
+//	workerRegistry.Add(workerRegistry.Num() +1, ny);
+
+}
+
+void AGameStateLogic::Setup()
+{	
+	for (int i = 0; i < 9; i++)
+	{
+		farmTileRegistry.Add(i, FarmTile());
+	}
+
+	AddWorker();
+	AddMoney(1500);
+}
+
+int32& AGameStateLogic::GetStorageFromResource(Resource resource)
+{
+	if (resource == wheat)
+	{
+		return wheatStored;
+	}
+
+	if (resource == apple)
+	{
+		return appleStored;
+	}
+	if (resource == cotton)
+	{
+		return cottonStored;
+	}
+	if (resource == pigMeat)
+	{
+		return pigMeatStored;
+	}
+
+	return wheatStored;
+}
+
+void AGameStateLogic::AddResources(Resource resource, int32 amount)
+{
+	int32 resourceStored = GetStorageFromResource(resource);
+
+	
+
+}
+
+void AGameStateLogic::ProductionPhase()
+{
+	for (auto& farmTilePair : farmTileRegistry)
+	{
+
+		farmTilePair.Value.storedResources += farmTilePair.Value.productionRate;
+
+		if (farmTilePair.Value.storedResources > farmTilePair.Value.maxStoredResources)
+		{
+			farmTilePair.Value.storedResources = farmTilePair.Value.maxStoredResources;
+		}
+	}
+}
+
+void AGameStateLogic::WorkPhase()
+{
+	for (auto& farmTilePair : farmTileRegistry)
+	{
+		for (Worker workerOnTile : farmTilePair.Value.workersOnTile)
+		{
+			if (workerOnTile.workType == harvesting)
+			{
+				if (farmTilePair.Value.storedResources < workerOnTile.workrate)
+				{
+					AddResources(farmTilePair.Value.resourceOnTile, farmTilePair.Value.storedResources);
+					farmTilePair.Value.storedResources = 0;
+				}
+				else
+				{
+					AddResources(farmTilePair.Value.resourceOnTile, workerOnTile.workrate);
+					farmTilePair.Value.storedResources = farmTilePair.Value.storedResources - workerOnTile.workrate;
+				}
+			}
+		}
+	}
+}
+
+void AGameStateLogic::StartTurnUpkeep()
+{
+	ProductionPhase();
 }
 
 // Called every frame
@@ -59,5 +128,6 @@ void AGameStateLogic::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	APlayerController controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 }
 

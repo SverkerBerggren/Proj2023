@@ -3,6 +3,8 @@
 #pragma once
 
 
+
+#include "EnumAndStructs.h"
 #include "Worker.h"
 #include "FarmTile.h"
 #include "CoreMinimal.h"
@@ -10,15 +12,6 @@
 #include "GameStateLogic.generated.h"
 
 
-enum WorkType
-{
-	build,harvest,slaughter,unassigned
-};
-
-enum Resource
-{
-	wheat, apple, cotton, pigMeat
-};
 UCLASS()
 class PROJ2023_API AGameStateLogic : public AActor
 {
@@ -28,9 +21,14 @@ private:
 	void Setup();
 	void StartTurnUpkeep();
 
+	void ProductionPhase();
+	void WorkPhase();
+
 	void AddWorker();
 	void AddResources(Resource resource, int32 amount);
 	void AddMoney(int32 amount);
+
+	int32& GetStorageFromResource(Resource resourceType);
 
 
 
@@ -48,10 +46,11 @@ private:
 	int32 cottonStored = 0; 
 	int32 pigMeatStored = 0; 
 
+	int32 workersCreated = 0;
 	
+	TMap<int32, Worker> workerRegistry;
 
-	TMap<int32, AWorker> workerRegistry = TMap<int32, AWorker>();
-	TMap<int32, AFarmTile> farmtileRegistry = TMap<int32, AFarmTile>();
+	TMap<int32, FarmTile> farmTileRegistry;
 	
 
 public:	

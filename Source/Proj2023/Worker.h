@@ -1,34 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-#include "GameStateLogic.h"
+#include "EnumAndStructs.h"
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "Worker.generated.h"
 
-UCLASS()
-class PROJ2023_API AWorker : public AActor
+/**
+ * 
+ */
+class PROJ2023_API Worker
 {
-	GENERATED_BODY()
+public:
+	Worker();
+	~Worker();
+
+	int32 workedId = -1;
+
+	int32 workrate = 80;
 	
-public:	
-	// Sets default values for this actor's properties
-	AWorker();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(EditAnywhere)
-	int32 workRate = 40;
-	UPROPERTY(EditAnywhere)
-	int32 salary = 100;
-
-
-	
-
+	WorkType workType = WorkType::unassigned;
 };

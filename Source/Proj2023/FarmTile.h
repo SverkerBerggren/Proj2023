@@ -2,25 +2,32 @@
 
 #pragma once
 
+
+
+#include "EnumAndStructs.h"
+#include "Worker.h"
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "FarmTile.generated.h"
 
-UCLASS()
-class PROJ2023_API AFarmTile : public AActor
+/**
+ * 
+ */
+class PROJ2023_API FarmTile
 {
-	GENERATED_BODY()
+public:
+	FarmTile();
+	~FarmTile();
+
+	bool buildingOnTile = false;
+
+	Resource resourceOnTile = Resource::wheat;
+
+	int32 maxStoredResources = 120; 
+	int32 storedResources = 0; 
+
+	int32 productionRate = 40; 
+
+	TArray<Worker> workersOnTile = TArray<Worker>();
 	
-public:	
-	// Sets default values for this actor's properties
-	AFarmTile();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };

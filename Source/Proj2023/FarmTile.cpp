@@ -3,25 +3,10 @@
 
 #include "FarmTile.h"
 
-// Sets default values
-AFarmTile::AFarmTile()
+FarmTile::FarmTile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 }
 
-// Called when the game starts or when spawned
-void AFarmTile::BeginPlay()
+FarmTile::~FarmTile()
 {
-	Super::BeginPlay();
-	
 }
-
-// Called every frame
-void AFarmTile::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
