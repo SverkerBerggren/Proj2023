@@ -50,6 +50,15 @@ void AGameStateLogic::Setup()
 	AddMoney(1500);
 }
 
+void AGameStateLogic::DoAction(Action action)
+{
+
+}
+
+bool AGameStateLogic::IsActionValid(Action action)
+{
+	return true;
+}
 int32& AGameStateLogic::GetStorageFromResource(Resource resource)
 {
 	if (resource == wheat)

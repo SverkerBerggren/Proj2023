@@ -31,7 +31,7 @@ private:
 
 	int32& GetStorageFromResource(Resource resourceType);
 
-
+	int32 nyIntBaraTEst = 0;
 
 	int32 maxActions = 0; 
 	int32 currentActions = 0;
@@ -66,6 +66,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	bool IsActionValid(Action action);
+
+	void DoAction(Action action);
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor>WorkerToSpawn;
