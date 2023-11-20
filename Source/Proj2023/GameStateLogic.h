@@ -5,6 +5,7 @@
 
 
 #include "EnumAndStructs.h"
+#include "Public/Action.h"
 #include "Worker.h"
 #include "FarmTile.h"
 #include "CoreMinimal.h"

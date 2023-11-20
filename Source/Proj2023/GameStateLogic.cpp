@@ -128,6 +128,8 @@ void AGameStateLogic::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	APlayerController controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	int testgrej = 5;
+
+	//APlayerController controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 }
 
