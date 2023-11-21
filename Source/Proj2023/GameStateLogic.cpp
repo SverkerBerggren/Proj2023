@@ -19,6 +19,8 @@ void AGameStateLogic::BeginPlay()
 {
 	Super::BeginPlay();
 	
+
+	Setup();
 	for (int i = 0; i < 9; i++)
 	{
 
@@ -36,7 +38,7 @@ void AGameStateLogic::AddWorker()
 
 	workersCreated += 1;
 //	workerRegistry.Add(workerRegistry.Num() +1, ny);
-
+	 
 }
 
 void AGameStateLogic::Setup()
@@ -59,7 +61,7 @@ bool AGameStateLogic::IsActionValid(Action action)
 {
 	return true;
 }
-int32& AGameStateLogic::GetStorageFromResource(Resource resource)
+int32& AGameStateLogic::GetStoredResourceAmount(Resource resource)
 {
 	if (resource == wheat)
 	{
@@ -84,9 +86,38 @@ int32& AGameStateLogic::GetStorageFromResource(Resource resource)
 
 void AGameStateLogic::AddResources(Resource resource, int32 amount)
 {
-	int32 resourceStored = GetStorageFromResource(resource);
+	int32 resourceStored = GetStoredResourceAmount(resource);
 
 	
+
+}
+
+int32 AGameStateLogic::GetAmountOfResource(Resource resource)
+{
+	if (resource == wheat)
+	{
+		return wheatStored;
+	}
+
+	if (resource == apple)
+	{
+		return appleStored;
+	}
+	if (resource == cotton)
+	{
+		return cottonStored;
+	}
+	if (resource == pigMeat)
+	{
+		return pigMeatStored;
+	}
+
+	if (resource == Money)
+	{
+		return moneyStored;
+	}
+
+	return wheatStored;
 
 }
 

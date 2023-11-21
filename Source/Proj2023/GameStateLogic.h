@@ -29,7 +29,7 @@ private:
 	void AddResources(Resource resource, int32 amount);
 	void AddMoney(int32 amount);
 
-	int32& GetStorageFromResource(Resource resourceType);
+	int32& GetStoredResourceAmount(Resource resourceType);
 
 	int32 nyIntBaraTEst = 0;
 
@@ -70,6 +70,8 @@ public:
 	bool IsActionValid(Action action);
 
 	void DoAction(Action action);
+
+	int32 GetAmountOfResource(Resource resourceType);
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor>WorkerToSpawn;
