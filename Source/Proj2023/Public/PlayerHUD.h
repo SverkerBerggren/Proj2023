@@ -15,7 +15,7 @@ class PROJ2023_API UPlayerHUD : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	/**Widget to use to display current health */
+	/**Widget to use to display current money */
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	class UImage* Money;
 	
