@@ -3,12 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "..\GameStateLogic.h"
+#include "Action.h"
 #include "Blueprint/UserWidget.h"
 #include "PlayerHUD.generated.h"
 
 /**
  * 
  */
+
+
 UCLASS()
 class PROJ2023_API UPlayerHUD : public UUserWidget
 {
@@ -18,5 +22,21 @@ public:
 	/**Widget to use to display current money */
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	class UImage* Money;
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* MoneyText;
+
+	UFUNCTION(BlueprintCallable)
+	void SetGameStateLogic();
+
+	void Refresh();
+	
+	bool IsActionValid();
+	void DoAction(Action action);
+
+private: 
+
+	void UpdateResources();
+
+	AGameStateLogic* gameState;
 	
 };
