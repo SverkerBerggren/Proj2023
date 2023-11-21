@@ -2,20 +2,15 @@
 
 #pragma once
 
+#include "Action.h"
 #include "CoreMinimal.h"
-
-
 
 /**
  * 
  */
-class PROJ2023_API Action
+class PROJ2023_API EndTurnAction: public Action
 {
 public:
-	Action();
-	virtual ~Action();
-
-	virtual void StubFunction();
-
-	
+	EndTurnAction();
+	~EndTurnAction() override;
 };

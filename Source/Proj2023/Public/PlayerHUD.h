@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "..\GameStateLogic.h"
+#include "WorkerPosition.h"
 #include "Action.h"
 #include "Blueprint/UserWidget.h"
 #include "PlayerHUD.generated.h"
@@ -25,18 +26,34 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* MoneyText;
 
+	UPROPERTY(meta = (BindWidget))
+	class UButton* EndTurnBtn;
+
 	UFUNCTION(BlueprintCallable)
 	void SetGameStateLogic();
 
 	void Refresh();
-	
+
+	UFUNCTION(BlueprintCallable)
+	void EndTurnClick();
+
 	bool IsActionValid();
 	void DoAction(Action action);
+
+	
 
 private: 
 
 	void UpdateResources();
+	void FindWorkerPositions();
+
+	void SetWorkerPositions();
+	
+	TArray<TArray<AWorkerPosition>> workerPositions; 
 
 	AGameStateLogic* gameState;
 	
+protected:
+	void NativeOnInitialized() override;
+
 };

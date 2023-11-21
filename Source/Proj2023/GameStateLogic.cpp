@@ -2,15 +2,20 @@
 
 
 #include "GameStateLogic.h"
-
+#include "Public/EndTurnAction.h"
 #include "Kismet/GameplayStatics.h"
-
 
 // Sets default values
 AGameStateLogic::AGameStateLogic()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+}
+
+void AGameStateLogic::ResetNumbers()
+{
+	currentActions = maxActions;
 
 }
 
@@ -48,13 +53,18 @@ void AGameStateLogic::Setup()
 		farmTileRegistry.Add(i, FarmTile());
 	}
 
+
+
 	AddWorker();
 	AddMoney(1500);
 }
 
-void AGameStateLogic::DoAction(Action action)
+void AGameStateLogic::DoAction(Action& action)
 {
+	
 
+	StartTurnUpkeep();
+	
 }
 
 bool AGameStateLogic::IsActionValid(Action action)
@@ -158,9 +168,18 @@ void AGameStateLogic::WorkPhase()
 	}
 }
 
+
+TMap<int32, Worker>  AGameStateLogic::GetWorkerRegistry()
+{
+	return workerRegistry;
+}
+
 void AGameStateLogic::StartTurnUpkeep()
 {
+	AddMoney(300);
 	ProductionPhase();
+	UE_LOG(LogTemp, Warning, TEXT("I upkeep"));
+
 }
 
 // Called every frame

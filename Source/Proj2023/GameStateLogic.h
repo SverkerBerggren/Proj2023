@@ -6,6 +6,7 @@
 
 #include "EnumAndStructs.h"
 #include "Public/Action.h"
+#include "Public/EndTurnAction.h"
 #include "Worker.h"
 #include "FarmTile.h"
 #include "CoreMinimal.h"
@@ -21,6 +22,7 @@ class PROJ2023_API AGameStateLogic : public AActor
 private: 
 	void Setup();
 	void StartTurnUpkeep();
+	void ResetNumbers();
 
 	void ProductionPhase();
 	void WorkPhase();
@@ -60,7 +62,7 @@ public:
 
 
 protected:
-	// Called when the game starts or when spawned
+	// Called when the game starts or when spawnedDoAction
 	virtual void BeginPlay() override;
 
 public:	
@@ -69,9 +71,11 @@ public:
 
 	bool IsActionValid(Action action);
 
-	void DoAction(Action action);
+	void DoAction(Action& action);
 
 	int32 GetAmountOfResource(Resource resourceType);
+
+	TMap<int32, Worker> GetWorkerRegistry();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor>WorkerToSpawn;
