@@ -28,6 +28,8 @@ void UPlayerHUD::FindWorkerPositions()
 
 	workerPositions.Add(TArray<AWorkerPosition>());
 
+	
+
 	for (AActor* actorsFound : workerPositionsToFind)
 	{
 		AWorkerPosition* workerPosition = (AWorkerPosition*)actorsFound;
