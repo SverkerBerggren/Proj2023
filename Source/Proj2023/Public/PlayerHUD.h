@@ -40,16 +40,22 @@ public:
 	bool IsActionValid();
 	void DoAction(Action action);
 
-	
+
+	UFUNCTION(BlueprintCallable)
+	void CreateCards();
+
 
 private: 
 
 	void UpdateResources();
 	void FindWorkerPositions();
 
+	void PlaceCards();
+
+
 	void SetWorkerPositions();
 	
-	TArray<TArray<AWorkerPosition>> workerPositions; 
+	TArray<TArray<AWorkerPosition*>> workerPositions; 
 
 	AGameStateLogic* gameState;
 	

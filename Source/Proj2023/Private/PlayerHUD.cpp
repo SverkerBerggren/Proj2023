@@ -21,21 +21,38 @@ void UPlayerHUD::EndTurnClick()
 
 
 }
+
+void UPlayerHUD::CreateCards()
+{
+		
+
+}
 void UPlayerHUD::FindWorkerPositions()
 {
 	TArray<AActor*> workerPositionsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWorkerPosition::StaticClass(), workerPositionsToFind);
 
-	workerPositions.Add(TArray<AWorkerPosition>());
+	for (int i = 0; i < 9; i++)
+	{	
 
-	
+		workerPositions.Add(TArray<AWorkerPosition*>());
+		for (int z = 0; z < 3; z++)
+		{
+			AWorkerPosition* workerPosition = nullptr;
+			
 
-	for (AActor* actorsFound : workerPositionsToFind)
-	{
-		AWorkerPosition* workerPosition = (AWorkerPosition*)actorsFound;
-
-		workerPositions[workerPosition->farmTileIndex].Add(*workerPosition);
+			workerPositions[i].Add(workerPosition);
+		}
 	}
+
+
+	for (AActor* foundPosition : workerPositionsToFind)
+	{
+		AWorkerPosition* foundWorkerPosition = (AWorkerPosition*)foundPosition;
+
+		workerPositions[foundWorkerPosition->farmTileIndex][foundWorkerPosition->orderInTile] = foundWorkerPosition;
+	}
+
 }
 void UPlayerHUD::NativeOnInitialized()
 {	
@@ -72,11 +89,15 @@ void UPlayerHUD::SetWorkerPositions()
 
 }
 
+void UPlayerHUD::DoAction(Action action)
+{
+
+	Refresh();
+}
 
 void UPlayerHUD::Refresh()
 {
 	UpdateResources();
-
 }
 
 
