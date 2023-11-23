@@ -13,7 +13,7 @@ void UCards::NativeConstruct()
 	Super::NativeConstruct();
 
 
-	CardButton->OnClicked.AddDynamic(this, &UCards::ChangeCardText());
+	//CardButton->OnClicked.AddDynamic(this, &UCards::ChangeButton());
 	
 }
 
