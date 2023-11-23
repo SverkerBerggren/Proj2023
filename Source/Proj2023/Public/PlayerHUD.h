@@ -44,6 +44,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CreateCards();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<AActor> workerBluePrintToSpawn;
+
+
 
 private: 
 
@@ -51,11 +55,15 @@ private:
 	void FindWorkerPositions();
 
 	void PlaceCards();
-
+	bool ContainsForTArrayWorker(TArray<Worker>& arrayToExamine, Worker& workerToFind);
 
 	void SetWorkerPositions();
+	void ResetWorkerPositions();
+	void PlaceWorker(int32 farmTileIndex, int32 workerId);
 	
 	TArray<TArray<AWorkerPosition*>> workerPositions; 
+	TSortedMap<int32, AActor*> workerToBePlacedRegistry;
+
 
 	AGameStateLogic* gameState;
 	

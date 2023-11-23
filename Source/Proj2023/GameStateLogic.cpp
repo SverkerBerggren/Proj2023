@@ -26,10 +26,7 @@ void AGameStateLogic::BeginPlay()
 	
 
 	Setup();
-	for (int i = 0; i < 9; i++)
-	{
 
-	}
 }
 void AGameStateLogic::AddMoney(int32 amount)
 {
@@ -39,7 +36,8 @@ void AGameStateLogic::AddMoney(int32 amount)
 void AGameStateLogic::AddWorker()
 {	
 	Worker newWorker = Worker();
-	workerRegistry.Add(workersCreated + 1, newWorker);
+	newWorker.workedId = workersCreated;
+	workerRegistry.Add(workersCreated, newWorker);
 
 	workersCreated += 1;
 //	workerRegistry.Add(workerRegistry.Num() +1, ny);
@@ -54,8 +52,10 @@ void AGameStateLogic::Setup()
 	}
 
 
+	
 
 	AddWorker();
+	farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
 	AddMoney(1500);
 }
 
@@ -169,14 +169,17 @@ void AGameStateLogic::WorkPhase()
 }
 
 
-TMap<int32, Worker>  AGameStateLogic::GetWorkerRegistry()
+const TSortedMap<int32, Worker>&  AGameStateLogic::GetWorkerRegistry()
 {
 	return workerRegistry;
+}
+const TMap<int32, FarmTile>&  AGameStateLogic::GetFarmTileRegistry()
+{
+	return farmTileRegistry;
 }
 
 void AGameStateLogic::StartTurnUpkeep()
 {
-	AddMoney(300);
 	ProductionPhase();
 	UE_LOG(LogTemp, Warning, TEXT("I upkeep"));
 

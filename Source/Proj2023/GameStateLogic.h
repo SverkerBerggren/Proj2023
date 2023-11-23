@@ -51,7 +51,7 @@ private:
 
 	int32 workersCreated = 0;
 	
-	TMap<int32, Worker> workerRegistry;
+	TSortedMap<int32, Worker> workerRegistry;
 
 	TMap<int32, FarmTile> farmTileRegistry;
 	
@@ -75,7 +75,8 @@ public:
 
 	int32 GetAmountOfResource(Resource resourceType);
 
-	TMap<int32, Worker> GetWorkerRegistry();
+	const TSortedMap<int32, Worker>& GetWorkerRegistry();
+	const TMap<int32, FarmTile>& GetFarmTileRegistry();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor>WorkerToSpawn;

@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "WorkerPosition.generated.h"
+#include "AWorkerActor.generated.h"
 
 UCLASS()
-class PROJ2023_API AWorkerPosition : public AActor
+class PROJ2023_API AAWorkerActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AWorkerPosition();
+	AAWorkerActor();
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,12 +22,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(EditAnywhere)
-	int32 farmTileIndex;
-	UPROPERTY(EditAnywhere)
-	int32 orderInTile;
-
-	bool workerPlacedHere = false;
 
 };

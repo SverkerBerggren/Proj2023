@@ -13,4 +13,5 @@ class PROJ2023_API EndTurnAction: public Action
 public:
 	EndTurnAction();
 	~EndTurnAction() override;
+
 };

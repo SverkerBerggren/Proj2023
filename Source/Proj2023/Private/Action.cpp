@@ -10,9 +10,3 @@ Action::Action()
 Action::~Action()
 {
 }
-
-void Action::StubFunction()
-{
-
-}
-

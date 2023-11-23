@@ -15,7 +15,8 @@ public:
 	Action();
 	virtual ~Action();
 
-	virtual void StubFunction();
+	
+
 
 	
 };
