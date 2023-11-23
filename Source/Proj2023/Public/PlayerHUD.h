@@ -20,8 +20,8 @@ class PROJ2023_API UPlayerHUD : public UUserWidget
 
 public:
 	/**Widget to use to display current money */
-	UPROPERTY(EditAnywhere, meta = (BindWidget))
-	class UImage* Money;
+	//UPROPERTY(EditAnywhere, meta = (BindWidget))
+	//class UImage* MoneyImage;
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* MoneyText;
 
