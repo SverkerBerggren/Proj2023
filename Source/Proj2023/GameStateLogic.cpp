@@ -2,15 +2,20 @@
 
 
 #include "GameStateLogic.h"
-
+#include "Public/EndTurnAction.h"
 #include "Kismet/GameplayStatics.h"
-
 
 // Sets default values
 AGameStateLogic::AGameStateLogic()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+}
+
+void AGameStateLogic::ResetNumbers()
+{
+	currentActions = maxActions;
 
 }
 
@@ -21,10 +26,7 @@ void AGameStateLogic::BeginPlay()
 	
 
 	Setup();
-	for (int i = 0; i < 9; i++)
-	{
 
-	}
 }
 void AGameStateLogic::AddMoney(int32 amount)
 {
@@ -34,7 +36,8 @@ void AGameStateLogic::AddMoney(int32 amount)
 void AGameStateLogic::AddWorker()
 {	
 	Worker newWorker = Worker();
-	workerRegistry.Add(workersCreated + 1, newWorker);
+	newWorker.workedId = workersCreated;
+	workerRegistry.Add(workersCreated, newWorker);
 
 	workersCreated += 1;
 //	workerRegistry.Add(workerRegistry.Num() +1, ny);
@@ -48,13 +51,20 @@ void AGameStateLogic::Setup()
 		farmTileRegistry.Add(i, FarmTile());
 	}
 
+
+	
+
 	AddWorker();
+	farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
 	AddMoney(1500);
 }
 
-void AGameStateLogic::DoAction(Action action)
+void AGameStateLogic::DoAction(Action& action)
 {
+	
 
+	StartTurnUpkeep();
+	
 }
 
 bool AGameStateLogic::IsActionValid(Action action)
@@ -158,9 +168,21 @@ void AGameStateLogic::WorkPhase()
 	}
 }
 
+
+const TSortedMap<int32, Worker>&  AGameStateLogic::GetWorkerRegistry()
+{
+	return workerRegistry;
+}
+const TMap<int32, FarmTile>&  AGameStateLogic::GetFarmTileRegistry()
+{
+	return farmTileRegistry;
+}
+
 void AGameStateLogic::StartTurnUpkeep()
 {
 	ProductionPhase();
+	UE_LOG(LogTemp, Warning, TEXT("I upkeep"));
+
 }
 
 // Called every frame

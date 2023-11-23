@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "..\GameStateLogic.h"
+#include "WorkerPosition.h"
 #include "Action.h"
 #include "Blueprint/UserWidget.h"
 #include "PlayerHUD.generated.h"
@@ -25,18 +26,48 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* MoneyText;
 
+	UPROPERTY(meta = (BindWidget))
+	class UButton* EndTurnBtn;
+
 	UFUNCTION(BlueprintCallable)
 	void SetGameStateLogic();
 
 	void Refresh();
-	
+
+	UFUNCTION(BlueprintCallable)
+	void EndTurnClick();
+
 	bool IsActionValid();
 	void DoAction(Action action);
+
+
+	UFUNCTION(BlueprintCallable)
+	void CreateCards();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<AActor> workerBluePrintToSpawn;
+
+
 
 private: 
 
 	void UpdateResources();
+	void FindWorkerPositions();
+
+	void PlaceCards();
+	bool ContainsForTArrayWorker(TArray<Worker>& arrayToExamine, Worker& workerToFind);
+
+	void SetWorkerPositions();
+	void ResetWorkerPositions();
+	void PlaceWorker(int32 farmTileIndex, int32 workerId);
+	
+	TArray<TArray<AWorkerPosition*>> workerPositions; 
+	TSortedMap<int32, AActor*> workerToBePlacedRegistry;
+
 
 	AGameStateLogic* gameState;
 	
+protected:
+	void NativeOnInitialized() override;
+
 };

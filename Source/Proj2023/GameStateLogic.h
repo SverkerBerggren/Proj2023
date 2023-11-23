@@ -6,6 +6,7 @@
 
 #include "EnumAndStructs.h"
 #include "Public/Action.h"
+#include "Public/EndTurnAction.h"
 #include "Worker.h"
 #include "FarmTile.h"
 #include "CoreMinimal.h"
@@ -21,6 +22,7 @@ class PROJ2023_API AGameStateLogic : public AActor
 private: 
 	void Setup();
 	void StartTurnUpkeep();
+	void ResetNumbers();
 
 	void ProductionPhase();
 	void WorkPhase();
@@ -49,7 +51,7 @@ private:
 
 	int32 workersCreated = 0;
 	
-	TMap<int32, Worker> workerRegistry;
+	TSortedMap<int32, Worker> workerRegistry;
 
 	TMap<int32, FarmTile> farmTileRegistry;
 	
@@ -60,7 +62,7 @@ public:
 
 
 protected:
-	// Called when the game starts or when spawned
+	// Called when the game starts or when spawnedDoAction
 	virtual void BeginPlay() override;
 
 public:	
@@ -69,9 +71,12 @@ public:
 
 	bool IsActionValid(Action action);
 
-	void DoAction(Action action);
+	void DoAction(Action& action);
 
 	int32 GetAmountOfResource(Resource resourceType);
+
+	const TSortedMap<int32, Worker>& GetWorkerRegistry();
+	const TMap<int32, FarmTile>& GetFarmTileRegistry();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor>WorkerToSpawn;
