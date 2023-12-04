@@ -6,6 +6,7 @@
 #include "..\GameStateLogic.h"
 #include "WorkerPosition.h"
 #include "Action.h"
+#include "..\\EnumAndStructs.h"
 #include "Blueprint/UserWidget.h"
 #include "PlayerHUD.generated.h"
 
@@ -32,6 +33,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetGameStateLogic();
 
+
+	UFUNCTION(BlueprintCallable)
+	void SetFarmTileReference();
+
 	void Refresh();
 
 	UFUNCTION(BlueprintCallable)
@@ -49,6 +54,13 @@ public:
 
 
 
+
+
+	//WorkType test = WorkType::unassigned;
+	void AddUIelementToStack(UUserWidget* UIElement, HudState stateNeeded);
+	
+	void PopUIStack();
+
 private: 
 
 	void UpdateResources();
@@ -64,8 +76,12 @@ private:
 	TArray<TArray<AWorkerPosition*>> workerPositions; 
 	TSortedMap<int32, AActor*> workerToBePlacedRegistry;
 
-
+	
 	AGameStateLogic* gameState;
+
+	HudState currentHudState = HudState::standard;
+
+	TArray<TPair<UUserWidget*, HudState>> stackOfUIElements;
 	
 protected:
 	void NativeOnInitialized() override;

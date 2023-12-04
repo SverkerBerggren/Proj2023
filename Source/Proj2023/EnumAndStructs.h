@@ -17,7 +17,10 @@ enum WorkType
 {
 	harvesting, building, slaughtering, unassigned
 };
-
+enum HudState
+{
+	standard, buildPopup
+};
 class PROJ2023_API EnumAndStructs
 {
 public:

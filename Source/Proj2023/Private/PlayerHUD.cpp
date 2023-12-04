@@ -6,8 +6,8 @@
 #include "CoreMinimal.h"
 #include "..\\Public\EndTurnAction.h"
 #include "Components/TextBlock.h"
+#include "ClickableFarmTile.h"
 #include "Components/Button.h"
-#include "..\\EnumAndStructs.h"
 #include "UObject/WeakObjectPtr.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -72,6 +72,7 @@ void UPlayerHUD::NativeOnInitialized()
 
 	FindWorkerPositions();
 	SetGameStateLogic();
+	SetFarmTileReference();
 }
 
 void UPlayerHUD::SetGameStateLogic()
@@ -88,6 +89,24 @@ void UPlayerHUD::SetGameStateLogic()
 		gameState = (AGameStateLogic*)actorToFind[0];
 	}
 	Refresh();
+}
+
+void UPlayerHUD::SetFarmTileReference()
+{
+	UWorld* world = GetWorld();
+
+	TArray<AActor*> actorsToFind;
+
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AClickableFarmTile::StaticClass(), actorsToFind);
+
+
+
+	for (AActor* actor : actorsToFind)
+	{
+		AClickableFarmTile* farmTile = (AClickableFarmTile*)actor;
+		farmTile->playerHUD = this;
+	}
+
 }
 
 void UPlayerHUD::UpdateResources()
